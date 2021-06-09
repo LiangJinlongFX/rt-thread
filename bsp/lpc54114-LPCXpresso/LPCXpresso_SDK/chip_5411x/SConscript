@@ -1,0 +1,21 @@
+import os
+from building import *
+Import('rtconfig')
+
+src = []
+src_path = os.path.join(GetCurrentDir(), "src")
+file_list = os.listdir(src_path)
+for file in file_list:
+    if os.path.splitext(file)[1] == ".c":
+        src.append(os.path.join("src", file))
+
+src.append('startup/keil_startup_LPC5411x.s')
+
+LIBS = ['keil_lib_power.lib']
+lib_path = [os.path.join(GetCurrentDir(), 'libs')]
+cpp_path = [os.path.join(GetCurrentDir(), 'inc')]
+cppdefines = ['CORE_M4', 'CHIP_LPC5411X']
+
+group = DefineGroup('LPCXpresso', src, depend = [''], LIBS=LIBS, LIBPATH=lib_path, CPPPATH=cpp_path, CPPDEFINES=cppdefines)
+
+Return('group')
