@@ -8,6 +8,9 @@
 #define DEBUG_UART  LPC_USART0
 #define USART0_FLEXCOMM         0
 
+/* SPI0 (master) is FLEXCOMM 5	*/
+#define SPI0_FLEXCOMM   				5      											
+
 /** Main system clock rate in Hz for this board. Select a clock rate between
     12MHz and 96MHz for the main system (CPU) clock for this board. */
 #define BOARD_MAINCLOCKRATE     (48000000)

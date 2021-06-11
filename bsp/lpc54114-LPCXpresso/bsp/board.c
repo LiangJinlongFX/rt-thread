@@ -147,23 +147,41 @@ void Board_LED_RGB_Off(void)
 	}
 }
 
+void thread_idle_hook()
+{
+	uint32_t count;
+	while(1)
+	{
+		count = 0xFFFFF;
+		while(count--);
+		Chip_GPIO_SetPinState(LPC_GPIO, 0, 29, true);
+		count = 0xFFFFF;
+		while(count--);
+		Chip_GPIO_SetPinState(LPC_GPIO, 0, 29, false);
+	}
+}
+
+
 /**
  * This function will initial LPC54xx board.
  */
 void rt_hw_board_init()
 {
-		/* INMUX and IOCON are used by many apps, enable both INMUX and IOCON clock bits here. */
-		Chip_Clock_EnablePeriphClock(SYSCON_CLOCK_INPUTMUX);
-		Chip_Clock_EnablePeriphClock(SYSCON_CLOCK_IOCON);
+	/* INMUX and IOCON are used by many apps, enable both INMUX and IOCON clock bits here. */
+	Chip_Clock_EnablePeriphClock(SYSCON_CLOCK_INPUTMUX);
+	Chip_Clock_EnablePeriphClock(SYSCON_CLOCK_IOCON);
+
+	/* get system clock */
+	SystemCoreClockUpdate();
+
+	/* Initialize GPIO */
+	Chip_GPIO_Init(LPC_GPIO);
+
+	/* Initialize the LEDs. Be careful with below routine, once it's called some of the I/O will be set to output. */
+	Board_LED_Init();
 	
-		/* get system clock */
-		SystemCoreClockUpdate();
-	
-		/* Initialize GPIO */
-		Chip_GPIO_Init(LPC_GPIO);
-		/* Initialize the LEDs. Be careful with below routine, once it's called some of the I/O will be set to output. */
-		Board_LED_Init();
-    
+		/*  */
+    rt_thread_idle_sethook(thread_idle_hook);
 		/* init systick  1 systick = 1/(100M / 100) 100??systick = 1s*/
     SysTick_Config(SystemCoreClock / RT_TICK_PER_SECOND);
     /* set pend exception priority */

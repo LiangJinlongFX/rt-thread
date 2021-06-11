@@ -18,9 +18,9 @@ int main(void)
 {
     /* user app entry */
     while(1)
-		{
-			rt_thread_delay(1000);
-		}
+	{
+		rt_thread_delay(1000);
+	}
 }
 
 /* Set up and initialize hardware prior to call to main */

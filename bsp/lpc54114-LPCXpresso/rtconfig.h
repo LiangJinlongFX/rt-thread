@@ -4,13 +4,15 @@
 /* Automatically generated file; DO NOT EDIT. */
 /* RT-Thread Configuration */
 
+#define SOC_LPC54114
+
 /* RT-Thread Kernel */
 
 #define RT_NAME_MAX 8
 #define RT_ALIGN_SIZE 4
 #define RT_THREAD_PRIORITY_32
 #define RT_THREAD_PRIORITY_MAX 32
-#define RT_TICK_PER_SECOND 1000
+#define RT_TICK_PER_SECOND 100
 #define RT_USING_OVERFLOW_CHECK
 #define RT_USING_HOOK
 #define RT_USING_IDLE_HOOK
@@ -19,9 +21,10 @@
 #define RT_USING_TIMER_SOFT
 #define RT_TIMER_THREAD_PRIO 4
 #define RT_TIMER_THREAD_STACK_SIZE 512
-#define RT_USING_USER_MAIN
+
+/* kservice optimization */
+
 #define RT_DEBUG
-#define RT_DEBUG_COLOR
 
 /* Inter-Thread communication */
 
@@ -34,7 +37,6 @@
 /* Memory Management */
 
 #define RT_USING_MEMPOOL
-#define RT_USING_MEMHEAP
 #define RT_USING_SMALL_MEM
 #define RT_USING_HEAP
 
@@ -44,17 +46,18 @@
 #define RT_USING_CONSOLE
 #define RT_CONSOLEBUF_SIZE 128
 #define RT_CONSOLE_DEVICE_NAME "uart0"
-#define RT_VER_NUM 0x40002
+#define RT_VER_NUM 0x40004
 #define ARCH_ARM
+#define RT_USING_USER_MAIN
 #define RT_USING_CPU_FFS
 #define ARCH_ARM_CORTEX_M
 #define ARCH_ARM_CORTEX_M4
 
 /* RT-Thread Components */
 
-#define RT_USING_COMPONENTS_INIT
 
 /* C++ features */
+
 
 /* Command shell */
 
@@ -73,43 +76,34 @@
 
 /* Device virtual file system */
 
-/* elm-chan's FatFs, Generic FAT Filesystem Module */
 
 /* Device Drivers */
 
 #define RT_USING_DEVICE_IPC
 #define RT_PIPE_BUFSZ 512
-#define RT_USING_SYSTEM_WORKQUEUE
-#define RT_SYSTEM_WORKQUEUE_STACKSIZE 2048
-#define RT_SYSTEM_WORKQUEUE_PRIORITY 23
 #define RT_USING_SERIAL
+#define RT_SERIAL_USING_DMA
 #define RT_SERIAL_RB_BUFSZ 64
-
-/* Using Hardware Crypto drivers */
-
-
-/* Using WiFi */
-
-
+#define RT_USING_PIN
+#define RT_USING_SPI
+#define RT_USING_COMPONENTS_INIT
 /* Using USB */
 
 
 /* POSIX layer and C standard library */
+
+#define RT_USING_LIBC
+#define RT_LIBC_FIXED_TIMEZONE 8
 
 /* Network */
 
 /* Socket abstraction layer */
 
 
-/* protocol stack implement */
-
 /* Network interface device */
 
+
 /* light weight TCP/IP stack */
-
-/* Static IPv4 Address */
-
-/* Modbus master and slave stack */
 
 
 /* AT commands */
@@ -121,7 +115,15 @@
 /* Utilities */
 
 
+/* RT-Thread Utestcases */
+
+
 /* RT-Thread online packages */
+
+/* system packages */
+
+/* RT-Thread GUI Engine */
+
 
 /* IoT - internet of things */
 
@@ -132,9 +134,6 @@
 
 
 /* Wiced WiFi */
-
-
-/* IoT Cloud */
 
 
 /* security packages */
@@ -149,18 +148,10 @@
 /* tools packages */
 
 
-/* system packages */
-
-
-/* peripheral libraries and drivers */
-
-
 /* miscellaneous packages */
 
 
-/* samples: kernel and components samples */
+/* example package: hello */
 
-#define SOC_LPC54114
-#define RT_USING_UART0
 
 #endif
